@@ -1,0 +1,61 @@
+let count = 0;
+const click = document.querySelector(".click");
+const evenColumn = document.querySelector(".even-column");
+const oddColumn = document.querySelector(".odd-column");
+const divisbleByThreeColumn = document.querySelector(".divisible-by-three");
+const divisbleByFiveColumn = document.querySelector(".divisible-by-five");
+const divisbleByFifteenColumn = document.querySelector(".divisible-by-fifteen");
+
+// Calculate and check each condition
+// after clicking: if it is even, we will put a box under the even column. This function should return true if the count is even.
+
+function createABox() {
+  let box = document.createElement("div");
+  box.classList.add("box");
+  return box;
+}
+
+function appendColumn(parentElement, boxElement) {
+  parentElement.appendChild(boxElement);
+  boxElement.innerText = count;
+
+  boxElement.addEventListener("click", function () {
+    boxElement.remove();
+  });
+}
+
+function checkDivisibility(count) {
+  let box = createABox();
+
+  if (count % 15 === 0) {
+    appendColumn(divisbleByFifteenColumn, box);
+  } else if (count % 5 === 0) {
+    appendColumn(divisbleByFiveColumn, box);
+  } else if (count % 3 === 0) {
+    appendColumn(divisbleByThreeColumn, box);
+  } else if (count % 2 === 1) {
+    appendColumn(oddColumn, box);
+  } else {
+    appendColumn(evenColumn, box);
+  }
+}
+
+//the orange oval button we are clicking
+//create logic
+click.addEventListener("click", function () {
+  ++count;
+  click.innerText = count;
+  checkDivisibility(count);
+});
+
+// evenColumn.innerHTML += `<div class="box"></div>`
+
+/* 
+  
+  add this class to each column:
+  
+  <div class="box"></div>
+  
+  
+  
+  */
